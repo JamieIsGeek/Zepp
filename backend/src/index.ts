@@ -3,6 +3,7 @@
 import "./threadsSignalFix";
 
 import {
+  ActivityType,
   Client,
   Events,
   GatewayIntentBits,
@@ -365,6 +366,10 @@ connect().then(async () => {
 
   client.once("ready", () => {
     startUptimeCounter();
+
+    client.user?.setPresence({
+      activities: [{ name: "over the sky", type: ActivityType.Watching }],
+    });
   });
 
   client.rest.on(RESTEvents.RateLimited, (data) => {
